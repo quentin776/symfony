@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TaskController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Liste des taches</h1>
+  {% if tasks is not empty %}
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Etat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td><a href="{{ path('task', {'id':task.id}) }}">{{ task.name }}</a></td>
+            {% if task.state %}
+              <td>Validé</td>
+            {% else %}
+              <td>En cours</td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <hr>
+  {% else %}
+    <p>Il n'y a aucune taches.
+  {% endif %}
+
+  {{ form(form_ajout) }}
+</div>
+{% endblock %}
